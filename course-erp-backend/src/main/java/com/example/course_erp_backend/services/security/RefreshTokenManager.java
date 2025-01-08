@@ -5,6 +5,7 @@ import com.example.course_erp_backend.models.mybatis.user.User;
 import com.example.course_erp_backend.models.properties.security.SecurityProperties;
 import com.example.course_erp_backend.services.base.TokenGenerator;
 import com.example.course_erp_backend.services.base.TokenReader;
+import com.example.course_erp_backend.services.getters.EmailGetter;
 import com.example.course_erp_backend.utils.PublicPrivateKeyUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -15,10 +16,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+import static com.example.course_erp_backend.constants.TokenConstants.EMAIL_KEY;
+
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class RefreshTokenManager implements TokenGenerator<RefreshTokenDto>, TokenReader<Claims> {
+public class RefreshTokenManager implements TokenGenerator<RefreshTokenDto>,
+        TokenReader<Claims> , EmailGetter {
 
     private final SecurityProperties securityProperties;
 
@@ -43,10 +47,21 @@ public class RefreshTokenManager implements TokenGenerator<RefreshTokenDto>, Tok
 
     @Override
     public Claims read(String token) {
-        return Jwts.parserBuilder()
+        Claims tokenData= Jwts.parserBuilder()
                 .setSigningKey(PublicPrivateKeyUtils.getPublicKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+        String typeOfToken=tokenData.get("type",String.class);
+        if (!"REFRESH_TOKEN".equals(typeOfToken)){
+            throw new RuntimeException("Invalid type of token");
+        }
+        return tokenData;
+    }
+
+    @Override
+    public String getEmail(String token) {
+        return read(token).get(EMAIL_KEY,String.class);
+
     }
 }

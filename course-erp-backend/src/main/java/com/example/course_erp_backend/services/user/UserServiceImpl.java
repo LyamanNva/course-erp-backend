@@ -1,5 +1,6 @@
 package com.example.course_erp_backend.services.user;
 
+import com.example.course_erp_backend.exception.BaseException;
 import com.example.course_erp_backend.models.mybatis.user.User;
 import com.example.course_erp_backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
@@ -21,7 +22,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public User getByEmail(String email) {
         return userRepository.findByEmail(email).orElseThrow(
-                ()->new RuntimeException("User not found")
+                () -> BaseException.notFound(User.class.getSimpleName(), "email", email)
         );
     }
 }

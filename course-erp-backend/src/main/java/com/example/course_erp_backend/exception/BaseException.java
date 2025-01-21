@@ -1,14 +1,14 @@
 package com.example.course_erp_backend.exception;
 
-import com.example.course_erp_backend.enums.response.ResponseMessages;
+import com.example.course_erp_backend.models.enums.response.ResponseMessages;
 import com.example.course_erp_backend.exception.types.NotFoundExceptionType;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.Map;
 
-import static com.example.course_erp_backend.enums.response.ErrorResponseMessages.NOT_FOUND;
-import static com.example.course_erp_backend.enums.response.ErrorResponseMessages.UNEXPECTED;
+import static com.example.course_erp_backend.models.enums.response.ErrorResponseMessages.NOT_FOUND;
+import static com.example.course_erp_backend.models.enums.response.ErrorResponseMessages.UNEXPECTED;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -25,8 +25,12 @@ public class BaseException extends RuntimeException {
         return responseMessage.message();
     }
 
+    public static BaseException of(ResponseMessages responseMessage){
+        return BaseException.builder().responseMessage(responseMessage).build();
+    }
+
     public static BaseException unexpected() {
-        return BaseException.builder().responseMessage(UNEXPECTED).build();
+        return BaseException.of(UNEXPECTED);
     }
 
     public static BaseException notFound(String target, String field, String value) {

@@ -1,4 +1,4 @@
-package com.example.course_erp_backend.enums.response;
+package com.example.course_erp_backend.models.enums.response;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

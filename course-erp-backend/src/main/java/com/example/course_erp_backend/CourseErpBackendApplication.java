@@ -1,25 +1,14 @@
 package com.example.course_erp_backend;
 
-import com.example.course_erp_backend.enums.user.UserStatus;
-import com.example.course_erp_backend.models.mybatis.user.User;
-import com.example.course_erp_backend.models.properties.security.SecurityProperties;
-import com.example.course_erp_backend.repository.UserRepository;
+import com.example.course_erp_backend.models.mappers.CourseEntityMapper;
+import com.example.course_erp_backend.models.payload.auth.SignUpPayload;
 import com.example.course_erp_backend.services.security.AccessTokenManager;
 import com.example.course_erp_backend.services.user.UserService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.util.Base64;
 
 @SpringBootApplication
 @RequiredArgsConstructor
@@ -40,6 +29,11 @@ public class CourseErpBackendApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+
+//		SignUpPayload payload=new SignUpPayload();
+//		payload.setName("123");
+//		payload.setCourseName("456");
+//		System.out.println(CourseEntityMapper.INSTANCE.fromSignUpPayload(payload));
 
 //		User user =User.builder()
 //				.email("leman@gmail.com")

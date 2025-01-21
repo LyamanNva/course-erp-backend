@@ -22,7 +22,7 @@ public class TestController {
 
     @GetMapping("/test/no-auth")
     public BaseResponse<String> testNoAuth() {
-        userService.getByEmail("no-auth@example.com");
+//        userService.getByEmail("no-auth@example.com");
 //throw BaseException.unexpected();
         return BaseResponse.success("Course ERP - No Auth");
     }

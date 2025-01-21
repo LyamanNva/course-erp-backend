@@ -1,6 +1,6 @@
 package com.example.course_erp_backend.models.base;
 
-import com.example.course_erp_backend.enums.response.ResponseMessages;
+import com.example.course_erp_backend.models.enums.response.ResponseMessages;
 import com.example.course_erp_backend.exception.BaseException;
 import com.example.course_erp_backend.exception.types.NotFoundExceptionType;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -8,8 +8,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 
-import static com.example.course_erp_backend.enums.response.ErrorResponseMessages.NOT_FOUND;
-import static com.example.course_erp_backend.enums.response.SuccessResponseMessages.SUCCESS;
+import static com.example.course_erp_backend.models.enums.response.ErrorResponseMessages.NOT_FOUND;
+import static com.example.course_erp_backend.models.enums.response.SuccessResponseMessages.SUCCESS;
 
 @Data
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

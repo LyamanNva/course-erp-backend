@@ -1,8 +1,10 @@
 package com.example.course_erp_backend.controller;
 
 import com.example.course_erp_backend.models.base.BaseResponse;
+import com.example.course_erp_backend.models.mappers.UserEntityMapper;
 import com.example.course_erp_backend.models.payload.auth.LoginPayload;
 import com.example.course_erp_backend.models.payload.auth.RefreshTokenPayload;
+import com.example.course_erp_backend.models.payload.auth.SignUpPayload;
 import com.example.course_erp_backend.models.response.auth.LoginResponse;
 import com.example.course_erp_backend.services.security.AuthBusinessService;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +33,13 @@ public class AuthController {
     @PostMapping("/logout")
     public BaseResponse<Void> logout() {
         authBusinessService.logout();
+        return BaseResponse.success();
+    }
+
+    @PostMapping("/sign-up")
+    public BaseResponse<Void> signUp(@RequestBody SignUpPayload payload){
+//        System.out.println(UserEntityMapper.INSTANCE.fromSignUpPayloadToUser(payload,"123456",1L));
+        authBusinessService.signup(payload);
         return BaseResponse.success();
     }
 }

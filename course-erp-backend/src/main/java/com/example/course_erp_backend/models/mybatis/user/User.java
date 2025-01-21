@@ -1,6 +1,6 @@
 package com.example.course_erp_backend.models.mybatis.user;
 
-import com.example.course_erp_backend.enums.user.UserStatus;
+import com.example.course_erp_backend.models.enums.user.UserStatus;
 import com.example.course_erp_backend.models.mybatis.base.BaseEntity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -19,4 +19,8 @@ public class User extends BaseEntity {
     String email;
     String phoneNumber;
     String password;
+
+    public boolean isActive(){
+        return UserStatus.ACTIVE.equals(status);
+    }
 }
